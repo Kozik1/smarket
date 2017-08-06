@@ -3,6 +3,7 @@ from __future__ import division
 import random, time
 import numpy as np
 from randtime import  randomDate, strTimeProp
+import unittest
 class stock:
    'Common base class for all STOCKS'
    stockCount = 0
@@ -41,12 +42,12 @@ price = input('Enter the prevailing stock market price:')
 # task i: Calculate Dividend yield depending on the type of a stock
 if (stockobj.type=="common"):
 	DY=stockobj.lastdiv/price
-	print  DY
-elif (stockobj.type=="preferred"): 
+	print  "Dividend yield is:", DY
+else:
 	DY=stockobj.fixdiv*stockobj.parvalue/price
 	print "Dividend yield is:", DY
-else:
-	print "You have entered an incorrect stock type!"
+
+
 
 # task ii: Calculate PE ratio
 PE=0
@@ -55,3 +56,23 @@ if 	(stockobj.lastdiv!=0):
 	print "PE ratio of", stockobj.name, "stock is", PE
 else:
 	print "Last divident of the stock is 0. Cannot calculate PE ratio."
+## Unit testing
+class DividendTestCase(unittest.TestCase):
+    """Tests for meeting division by zero and non-negativity conditions."""
+    def test_price_non_zero(self):
+        """Price should be strictly greater than zero!"""
+        self.assertGreater(price,0)      
+        
+    def test_DY_positive(self):
+        """Dividend yield cannot be negative!"""
+        self.assertGreaterEqual(DY,0)      	
+    def test_PE_positive(self):
+        """PE ratio cannot be negative!"""
+        self.assertGreaterEqual(PE,0)     
+         		
+    def test_lastdiv_non_zero(self):
+        """lastdiv strictly greater than zero!"""
+        self.assertGreater(stockobj.lastdiv,0)		
+
+if __name__ == '__main__':
+    unittest.main()

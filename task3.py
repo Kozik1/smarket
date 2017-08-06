@@ -2,6 +2,7 @@
 import random, time, datetime
 import numpy as np
 import scipy.stats
+import unittest
 from randtime import  randomDate, strTimeProp
 # task iii: Record transaction
 class trade:
@@ -78,3 +79,22 @@ print "The Volume Weighted Stock Price based on trades in past 15 minutes is", t
 # is that some stocks could be traded more often than others. 
 GBCE=scipy.stats.mstats.gmean(pricebase)
 print "GBCE All Share Index is equal to: ", GBCE
+
+## Unit testing
+class TradingTestCase(unittest.TestCase):
+    """Tests for meeting division by zero and non-negativity conditions."""
+
+    def test_SQ_non_zero(self):
+        """sum_quantity should be strictly greater than zero!"""
+        self.assertGreater(sum_quantity,0)
+        
+    def test_VWSP_positive(self):
+    	"""The volume weighted stock price cannot be negative!"""
+    	self.assertGreaterEqual(task4answer,0)
+    	
+    def test_DY_positive(self):
+    	"""GBCE All Share Index cannot be negative!"""
+    	self.assertGreaterEqual(GBCE,0)
+
+if __name__ == '__main__':
+    unittest.main()
