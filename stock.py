@@ -56,7 +56,7 @@ if 	(stockobj.lastdiv!=0):
 	print "PE ratio of", stockobj.name, "stock is", PE
 else:
 	print "Last divident of the stock is 0. Cannot calculate PE ratio."
-## Unit testing
+## Unit testing. Try entering a negative price for example!
 class DividendTestCase(unittest.TestCase):
     """Tests for meeting division by zero and non-negativity conditions."""
     def test_price_non_zero(self):
